@@ -1,0 +1,62 @@
+# Node modules (dependencies)
+node_modules/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.cache
+
+# Build artifacts
+dist/
+build/
+coverage/
+output/
+
+# Environment variables
+.env
+.env.*
+
+# Public and static assets
+public/
+static/
+assets/
+
+# Configuration files that don't require formatting
+package-lock.json
+yarn.lock
+
+# Generated files
+swagger.json
+*.min.js
+*.min.css
+
+# Git files
+.git/
+
+# Docker and Kubernetes files
+Dockerfile
+docker-compose.yml
+
+# CI/CD files
+.github/
+.gitlab/
+.circleci/
+.vscode/
+.idea/
+
+# VSCode settings and workspace files
+.vscode/
+*.code-workspace
+
+# Ignore specific test data files
+test/**/*.snap
+
+# Markdown files
+*.md
+
+# Specific configuration files
+tsconfig.json
+.eslintrc.json
+.prettierrc
+.editorconfig
