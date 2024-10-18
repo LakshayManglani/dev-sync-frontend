@@ -1,0 +1,100 @@
+:root {
+  --input-text-color: var(--color-text-primary);
+  --input-background-color: var(--color-component-regular);
+  --validation-text-color-error: var(--color-base-red);
+  --validation-text-color-success: var(--color-base-green);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  width: 100%;
+  color: var(--input-text-color);
+}
+
+.label {
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: inherit;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--input-background-color);
+  transition: all 0.2s ease;
+
+  /* Border styles */
+  &.border-size-full {
+    border-radius: 99rem;
+  }
+  
+  &.border-size-small {
+    border-radius: 0.5rem;
+  }
+
+  /* Input status */
+  &.state-rest {
+    box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.2), inset 0px -0.5px 1px rgba(255, 255, 255, 0.25);
+  }
+
+  &.state-disabled {
+    cursor: not-allowed;
+    background-color: var(--color-control-disabled);
+    color: var(--color-text-tertiary);
+  }
+
+  &.validation-state-error {
+    box-shadow: inset 0 0 0 1px var(--validation-text-color-error);
+  }
+
+  &.validation-state-success {
+    box-shadow: inset 0 0 0 1px var(--validation-text-color-success);
+  }
+}
+
+.input {
+  flex: 1;
+  border: none;
+  background: none;
+  color: var(--input-text-color);
+  outline: none;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  caret-color: var(--color-base-brand);
+  width: 100%;
+
+  &::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  &:-webkit-autofill {
+    -webkit-text-fill-color: var(--input-text-color) !important;
+    -webkit-box-shadow: 0 0 0 4rem var(--color-base-background) inset !important;
+  }
+}
+
+.validationContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  * {
+    color: inherit;
+  }
+
+  &.state-error {
+    color: var(--validation-text-color-error);
+  }
+
+  &.state-success {
+    color: var(--validation-text-color-success);
+  }
+
+  .validationIcon {
+    flex-shrink: 0;
+  }
+}

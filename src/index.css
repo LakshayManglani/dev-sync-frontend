@@ -3,7 +3,7 @@
 
 :root {
   --color-base-brand: rgba(2, 128, 255, 1);
-  --color-base-background: rgba(10, 10, 10, 1);
+  --color-base-background: rgba(20, 20, 20, 1);
   --color-base-red: rgba(255, 69, 58, 1);
   --color-base-blue: rgba(2, 128, 255, 1);
   --color-base-orange: rgba(255, 159, 10, 1);
@@ -118,6 +118,14 @@ code {
   font-family: var(--font-family-code);
 }
 
+span {
+  display: inline-flex;
+}
+
+a {
+  text-decoration: none;
+}
+
 /*
   7. Avoid text overflows
 */
@@ -228,4 +236,16 @@ button {
   outline: none;
   cursor: pointer;
   user-select: none;
+}
+
+/*--------------------------------*\
+  => Glass
+\*--------------------------------*/
+
+.glass {
+  background: var(--color-component-glass);
+  box-shadow:
+    inset 0 0 0 1px var(--color-control-separator),
+    0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(20px);
 }

@@ -1,40 +1,22 @@
-// import styles from './Counter.module.scss';
-import { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import clsx from 'clsx';
+import styles from './Counter.module.scss';
 import { CounterProps } from './types';
-import { StyledCounter } from './Counter.styles';
 
-function Counter({
-  count,
-  status = 'rest',
-  className,
-  ariaLabel,
-}: Readonly<CounterProps>) {
-  const [animate, setAnimate] = useState(false);
-  const isFirstRender = useRef(true);
-
-  useEffect(() => {
-    if (isFirstRender) {
-      // Skip animation on the first render
-      isFirstRender.current = false;
-      return;
-    }
-
-    setAnimate(true);
-    const timer = setTimeout(() => setAnimate(false), 300);
-    return () => clearTimeout(timer);
-  }, [count]);
-
-  return (
-    <StyledCounter
-      $status={status}
-      $animate={animate}
-      className={className}
-      aria-live="polite"
-      aria-label={ariaLabel ?? `Current count: ${count}`}
-    >
-      {count}
-    </StyledCounter>
-  );
-}
+const Counter = React.forwardRef<HTMLOutputElement, CounterProps>(
+  ({ count, className, 'aria-label': ariaLabel, ...props }, ref) => {
+    return (
+      <output
+        ref={ref}
+        className={clsx(styles.counter, `body-base-slim`, className)}
+        aria-live="polite"
+        aria-label={ariaLabel ?? `Current count: ${count}`}
+        {...props}
+      >
+        {count}
+      </output>
+    );
+  }
+);
 
 export default Counter;

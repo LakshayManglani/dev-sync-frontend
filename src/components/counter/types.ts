@@ -1,6 +1,7 @@
-export interface CounterProps {
+import React from 'react';
+
+export interface CounterProps
+  extends React.OutputHTMLAttributes<HTMLOutputElement> {
   count: number;
-  status?: 'rest' | 'selected-invert' | 'disabled';
   className?: string;
-  ariaLabel?: string;
 }
