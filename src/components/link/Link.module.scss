@@ -7,7 +7,6 @@
   padding: 0rem 0.25rem;
   width: max-content;
   border-radius: 99rem;
-  height: 1.25rem;
 
   &:hover {
     background: var(--color-control-hover);
@@ -17,4 +16,12 @@
     background: var(--color-control-selected);
     color: var(--color-text-primary-invert);
   }
+}
+
+.size-small {
+  height: 1.25rem;
+}
+
+.size-large {
+  height: 1.5rem;
 }

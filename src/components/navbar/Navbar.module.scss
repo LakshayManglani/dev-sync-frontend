@@ -5,4 +5,11 @@
   gap: 0.25rem;
   width: fit-content;
   border-radius: 1rem;
+
+
+  position: fixed;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 2rem;
+  z-index: 100;
 }

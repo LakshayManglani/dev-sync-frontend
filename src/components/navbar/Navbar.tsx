@@ -7,9 +7,8 @@ import {
 } from '@fluentui/react-icons';
 import styles from './Navbar.module.scss';
 import clsx from 'clsx';
-import { useState } from 'react';
-import NavLink from '../navLink';
-import Slide from '../animation/slide';
+import React, { useState } from 'react';
+import { NavLink, SlideAnimation } from '..';
 
 const linkOptions = [
   {
@@ -39,7 +38,10 @@ const linkOptions = [
   },
 ];
 
-function Navbar() {
+const Navbar = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>((props, ref) => {
   const [showLabel, setShowLabel] = useState(false);
   let hoverTimer: number;
 
@@ -58,19 +60,23 @@ function Navbar() {
       className={clsx(styles.nav, 'glass')}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      ref={ref}
+      {...props}
     >
       {linkOptions.map(({ to, label, icon }) => (
         <NavLink
           to={to}
           key={label}
           leftIcon={icon}
-          label={showLabel ? <Slide>{label}</Slide> : undefined}
+          label={
+            showLabel ? <SlideAnimation>{label}</SlideAnimation> : undefined
+          }
           status="simple"
           style={{ justifyContent: 'left' }}
         />
       ))}
     </nav>
   );
-}
+});
 
 export default Navbar;

@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonProps } from './types';
 import styles from './Button.module.scss';
 import clsx from 'clsx';
-import Counter from '../counter';
+import { Counter } from '..';
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -39,7 +39,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {leftIcon && <span>{leftIcon}</span>}
-        {label && <span>{label}</span>}
+        {label && <span className="body-strong">{label}</span>}
         {count !== undefined && (
           <span>
             <Counter count={count} className={styles.counter} />

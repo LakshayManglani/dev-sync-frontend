@@ -1,25 +1,45 @@
+import { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Components from './pages/dev/components';
+import { LazyHome, LazyComponents } from './features';
 import Layout from './Layout';
-import Home from './pages/home';
+import { routes } from './routes';
+import AuthRoutes from './features/auth/AuthRoutes';
+import RequireAuth from './features/auth/components/RequireAuth';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Layout />,
+    path: routes.home,
     children: [
       {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: 'dev',
+        element: <RequireAuth />,
         children: [
           {
-            path: 'components',
-            element: <Components />,
+            element: <Layout />,
+            children: [
+              {
+                path: routes.home,
+                element: (
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <LazyHome />
+                  </Suspense>
+                ),
+              },
+            ],
           },
         ],
+      },
+
+      // Auth routes
+      ...AuthRoutes,
+
+      // Development route
+      {
+        path: routes.devComponents,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <LazyComponents />
+          </Suspense>
+        ),
       },
     ],
   },

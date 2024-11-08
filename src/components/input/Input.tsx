@@ -2,13 +2,14 @@ import React, { useCallback, useState } from 'react';
 import { InputProps } from './types';
 import styles from './Input.module.scss';
 import clsx from 'clsx';
-import Button from '../button';
+import { Button } from '..';
 import {
   CheckmarkCircle16Filled,
   Eye16Filled,
   EyeOff16Filled,
   Warning16Filled,
 } from '@fluentui/react-icons';
+import { camelCase } from 'change-case';
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -21,9 +22,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       validation,
       disabled,
       className,
-      id = typeof label === 'string' ? label.toLowerCase() : 'input',
+      id = typeof label === 'string' ? camelCase(label) : 'input',
+      name,
       style,
       type = 'text',
+      required,
       ...props
     },
     ref
@@ -53,8 +56,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={clsx(styles.wrapper, className)} style={style}>
         {label && (
-          <label className={styles.label} htmlFor={id}>
+          <label className="body-strong" htmlFor={id}>
             {label}
+            {required && ' *'}
           </label>
         )}
 
@@ -80,12 +84,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             type={inputType}
             id={id}
+            name={name ?? id}
+            required={required}
             {...props}
           />
           {finalRightButton && (
             <Button
               status="simple"
               size="small"
+              type="button"
               {...finalRightButton}
               disabled={currentState === 'disabled'}
             />

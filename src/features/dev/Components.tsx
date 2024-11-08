@@ -1,14 +1,16 @@
 // import Button from '../../../components/button/Button';
-import Button from '../../../components/button';
-import Counter from '../../../components/counter';
-import Navbar from '../../../components/navbar';
-import NavLink from '../../../components/navLink';
-import Slide from '../../../components/animation/slide';
+import {
+  Button,
+  Counter,
+  Navbar,
+  NavLink,
+  SlideAnimation,
+  Link,
+  Input,
+} from '../../components';
 
 import { Search16Filled } from '@fluentui/react-icons';
-import reactSvg from '../../../assets/react.svg';
-import Link from '../../../components/link';
-import Input from '../../../components/input';
+import reactSvg from '../../assets/react.svg';
 
 function Components() {
   return (
@@ -95,12 +97,27 @@ function Components() {
       <Link to={'/'}>Home</Link>
 
       <h2 className="heading-small">Navbar:</h2>
-      <Navbar />
+      <div style={{ position: 'relative' }}>
+        <Navbar style={{ position: 'unset', translate: '0 50%' }} />
+      </div>
 
       <h2 className="heading-small">Slide Animation:</h2>
-      <Slide>
-        <p className="body-base">Refresh to play</p>
-      </Slide>
+      <SlideAnimation>
+        <p className="body-base">
+          Refresh to play Lorem ipsum dolor sit amet consectetur, adipisicing
+          elit. Eaque molestias asperiores hic sapiente odio! Nulla ab ipsa
+          tempora est deleniti incidunt beatae cum facilis, ullam cumque minus
+          aspernatur quibusdam suscipit sed optio rerum dolores! Ipsa eveniet
+          quo unde, natus labore cum repudiandae nisi eligendi commodi ex.
+          Facilis excepturi blanditiis dolor, beatae iure aut deserunt, sed
+          quibusdam dolorem at tempore magnam perspiciatis eius inventore ipsa
+          earum est. Quae eveniet, a consequuntur officia, delectus, est
+          necessitatibus nesciunt magni esse asperiores quaerat. Nisi numquam
+          rerum magnam optio laboriosam. Autem expedita unde aliquam ducimus
+          tenetur cumque dolor eos ratione in placeat asperiores, quibusdam
+          magni!
+        </p>
+      </SlideAnimation>
 
       <h2 className="heading-small">Input:</h2>
       <Input

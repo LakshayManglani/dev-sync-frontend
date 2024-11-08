@@ -5,10 +5,15 @@ import styles from './Link.module.scss';
 import clsx from 'clsx';
 
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, size = 'small', ...props }, ref) => {
     return (
       <RouterLink
-        className={clsx(styles.link, 'body-link', className)}
+        className={clsx(
+          styles.link,
+          styles[`size-${size}`],
+          'body-link',
+          className
+        )}
         ref={ref}
         {...props}
       />

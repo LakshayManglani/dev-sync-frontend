@@ -13,19 +13,13 @@
   color: var(--input-text-color);
 }
 
-.label {
-  margin-bottom: 0.25rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: inherit;
-}
-
 .inputContainer {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   background-color: var(--input-background-color);
   transition: all 0.2s ease;
+  min-height: 3rem;
 
   /* Border styles */
   &.border-size-full {
@@ -62,7 +56,7 @@
   background: none;
   color: var(--input-text-color);
   outline: none;
-  padding: 0.5rem;
+  padding: 0;
   margin: 0 0.5rem;
   caret-color: var(--color-base-brand);
   width: 100%;
@@ -74,6 +68,11 @@
   &:-webkit-autofill {
     -webkit-text-fill-color: var(--input-text-color) !important;
     -webkit-box-shadow: 0 0 0 4rem var(--color-base-background) inset !important;
+    padding: 0.25rem;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 }
 
