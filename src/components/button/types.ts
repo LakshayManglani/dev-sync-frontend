@@ -1,4 +1,5 @@
 import React from 'react';
+import { CounterProps } from '../';
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,6 +9,6 @@ export interface ButtonProps
   border?: 'full' | 'small';
   leftIcon?: React.ReactNode;
   label?: string | React.ReactNode;
-  count?: number;
+  counter?: CounterProps;
   rightIcon?: React.ReactNode;
 }

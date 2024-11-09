@@ -1,10 +1,10 @@
-import React from 'react';
 import clsx from 'clsx';
 import styles from './Counter.module.scss';
 import { CounterProps } from './types';
+import React from 'react';
 
 const Counter = React.forwardRef<HTMLOutputElement, CounterProps>(
-  ({ count, className, 'aria-label': ariaLabel, ...props }, ref) => {
+  ({ count, unit = '', className, 'aria-label': ariaLabel, ...props }, ref) => {
     return (
       <output
         ref={ref}
@@ -13,7 +13,7 @@ const Counter = React.forwardRef<HTMLOutputElement, CounterProps>(
         aria-label={ariaLabel ?? `Current count: ${count}`}
         {...props}
       >
-        {count}
+        {`${count} ${unit}`}
       </output>
     );
   }

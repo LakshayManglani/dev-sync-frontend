@@ -17,7 +17,7 @@ const RegisterForm = () => {
   const [error, setError] = useState(INITIAL_ERROR_STATE);
   const [emailSent, setEmailSent] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [countdown, setCountdown] = useState(30);
+  const [countdown, setCountdown] = useState(60);
 
   const debouncedEmail = useDebouncedValue(formValues.email);
   const debouncedUsername = useDebouncedValue(formValues.username);
@@ -43,7 +43,7 @@ const RegisterForm = () => {
       timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
     } else if (countdown === 0) {
       setButtonDisabled(false);
-      setCountdown(30);
+      setCountdown(60);
     }
     return () => clearTimeout(timer);
   }, [buttonDisabled, countdown]);
@@ -72,7 +72,7 @@ const RegisterForm = () => {
       await sendVerificationEmail(formData).unwrap();
       setEmailSent(true);
       setButtonDisabled(true);
-      setCountdown(30);
+      setCountdown(60);
     } catch (err) {
       console.error('Error sending verification email:', err);
     }
@@ -187,10 +187,14 @@ const ActionButton = ({
   buttonDisabled: boolean;
 }) => (
   <Button
-    label={
+    label={buttonDisabled ? `Resend Email` : 'Send Verification Email'}
+    counter={
       buttonDisabled
-        ? `Resend Email (${countdown}s)`
-        : 'Send Verification Email'
+        ? {
+            count: countdown,
+            unit: 's',
+          }
+        : undefined
     }
     variant="primary"
     status="rest"

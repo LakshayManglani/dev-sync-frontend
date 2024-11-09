@@ -13,7 +13,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       border = 'full',
       leftIcon,
       label,
-      count,
+      counter,
       rightIcon,
       disabled,
       className,
@@ -40,9 +40,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {leftIcon && <span>{leftIcon}</span>}
         {label && <span className="body-strong">{label}</span>}
-        {count !== undefined && (
+        {counter !== undefined && (
           <span>
-            <Counter count={count} className={styles.counter} />
+            <Counter {...counter} className={styles.counter} />
           </span>
         )}
         {rightIcon && <span>{rightIcon}</span>}

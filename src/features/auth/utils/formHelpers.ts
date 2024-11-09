@@ -20,11 +20,9 @@ export const extractRegisterFormData = (form: HTMLFormElement) => {
 
 export const extractLoginFormData = (form: HTMLFormElement) => {
   const formData = new FormData(form);
-  const { emailOrUsername, password } = Object.fromEntries(
-    formData.entries()
-  ) as {
-    emailOrUsername: string;
+  const { username, password } = Object.fromEntries(formData.entries()) as {
+    username: string;
     password: string;
   };
-  return { emailOrUsername, password };
+  return { emailOrUsername: username, password };
 };
