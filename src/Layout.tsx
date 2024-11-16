@@ -6,8 +6,10 @@ function Layout() {
   return (
     <>
       <Navbar />
-      <main className={styles.main}>
-        <Outlet />
+      <main className={`full center`}>
+        <div className={styles.mainContent}>
+          <Outlet />
+        </div>
       </main>
     </>
   );

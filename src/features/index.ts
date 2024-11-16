@@ -1,7 +1,9 @@
 import { lazy } from 'react';
 
-export { default as Home } from './home/Home';
+// Lazy-loaded components
 export const LazyHome = lazy(() => import('./home/Home'));
-
-export { default as Components } from './dev/Components';
 export const LazyComponents = lazy(() => import('./dev/Components'));
+
+// Default exports for non-lazy imports
+export { default as Home } from './home/Home';
+export { default as Components } from './dev/Components';

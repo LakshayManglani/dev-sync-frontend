@@ -85,6 +85,8 @@ const RegisterForm = () => {
         onChange={handleChange}
         error={error}
         isLoading={isCheckingAvailability}
+        debouncedEmail={debouncedEmail}
+        debouncedUsername={debouncedUsername}
       />
       {emailSent && <SuccessMessage />}
       <ActionButton
@@ -101,6 +103,8 @@ const InputFieldGroup = ({
   onChange,
   error,
   isLoading,
+  debouncedEmail,
+  debouncedUsername,
 }: {
   formValues: typeof INITIAL_FORM_VALUES;
   onChange: (
@@ -108,6 +112,8 @@ const InputFieldGroup = ({
   ) => (e: ChangeEvent<HTMLInputElement>) => void;
   error: typeof INITIAL_ERROR_STATE;
   isLoading: boolean;
+  debouncedEmail: string;
+  debouncedUsername: string;
 }) => (
   <div className={styles.inputGroup}>
     <div className={styles.nameInput}>
@@ -128,7 +134,7 @@ const InputFieldGroup = ({
       value={formValues.username}
       onChange={onChange('username')}
       validation={
-        formValues.username && !isLoading
+        debouncedUsername && !isLoading
           ? {
               state: error.username ? 'success' : 'error',
               message: error.username
@@ -146,7 +152,7 @@ const InputFieldGroup = ({
       value={formValues.email}
       onChange={onChange('email')}
       validation={
-        formValues.email && !isLoading
+        debouncedEmail && !isLoading
           ? {
               state: error.email ? 'success' : 'error',
               message: error.email

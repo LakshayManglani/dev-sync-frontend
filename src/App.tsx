@@ -5,6 +5,11 @@ import Layout from './Layout';
 import { routes } from './routes';
 import AuthRoutes from './features/auth/AuthRoutes';
 import RequireAuth from './features/auth/components/RequireAuth';
+import ProfileRoutes from './features/profile/ProfileRoutes';
+import { useSelfQuery } from './app/services/user';
+import { selectCurrentUser } from './features/auth/auth.slice';
+import { useAppSelector } from './app/hooks';
+import { FallbackLoader } from './components';
 
 const router = createBrowserRouter([
   {
@@ -19,11 +24,12 @@ const router = createBrowserRouter([
               {
                 path: routes.home,
                 element: (
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<FallbackLoader />}>
                     <LazyHome />
                   </Suspense>
                 ),
               },
+              ...ProfileRoutes,
             ],
           },
         ],
@@ -46,6 +52,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const user = useAppSelector(selectCurrentUser);
+  const { isLoading } = useSelfQuery(undefined, {
+    skip: user.isLoggedIn,
+  });
+
+  if (isLoading) {
+    return <FallbackLoader />;
+  }
+
   return <RouterProvider router={router} />;
 }
 

@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
 export interface AuthState {
-  _id: string | null;
+  authUserId: string | null;
   accessToken: string | null;
   username: string | null;
   email: string | null;
@@ -14,7 +14,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  _id: null,
+  authUserId: null,
   accessToken: null,
   username: null,
   email: null,
@@ -29,11 +29,26 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action) => {
-      const { userId, accessToken } = action.payload;
-      state._id = userId;
-      state.accessToken = accessToken;
-      state.isLoggedIn = true;
+    setCredentials: (state, action: PayloadAction<Partial<AuthState>>) => {
+      const {
+        authUserId,
+        accessToken,
+        username,
+        email,
+        givenName,
+        familyName,
+        role,
+      } = action.payload;
+      Object.assign(state, {
+        authUserId,
+        accessToken,
+        username,
+        email,
+        givenName,
+        familyName,
+        role,
+        isLoggedIn: true,
+      });
     },
     logout: () => initialState,
   },

@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useVerifyAndCreateMutation } from '../../../app/services/auth';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from '../../../components';
 
 const Verify = () => {
@@ -9,9 +9,12 @@ const Verify = () => {
   const [verifyAndCreate, { isLoading, isError, isSuccess }] =
     useVerifyAndCreateMutation();
 
+  const hasCalled = useRef(false);
+
   useEffect(() => {
-    if (token) {
+    if (token && !hasCalled.current) {
       verifyAndCreate({ token });
+      hasCalled.current = true;
     }
   }, [token, verifyAndCreate]);
 

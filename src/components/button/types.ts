@@ -11,4 +11,5 @@ export interface ButtonProps
   label?: string | React.ReactNode;
   counter?: CounterProps;
   rightIcon?: React.ReactNode;
+  responsive?: boolean;
 }

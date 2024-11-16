@@ -7,23 +7,27 @@ import {
 } from '@fluentui/react-icons';
 import styles from './Navbar.module.scss';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, SlideAnimation } from '..';
+import { useAppSelector } from '../../app/hooks';
+import { selectCurrentUser } from '../../features/auth/auth.slice';
+import { routes } from '../../routes';
+import { useLocation } from 'react-router-dom';
 
 const linkOptions = [
   {
     label: 'Home',
-    to: '/',
+    to: routes.home,
     icon: <Home16Filled />,
   },
   {
     label: 'Explore',
-    to: '/explore',
+    to: routes.explore,
     icon: <CompassNorthwest16Filled />,
   },
   {
     label: 'Chat',
-    to: '/chat',
+    to: routes.chat,
     icon: <Chat16Filled />,
   },
   {
@@ -38,11 +42,41 @@ const linkOptions = [
   },
 ];
 
+// TODO: Improve the navbar logic
+
 const Navbar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >((props, ref) => {
   const [showLabel, setShowLabel] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState('');
+  const [isTablet, setIsTablet] = useState(window.innerWidth < 1280);
+  const user = useAppSelector(selectCurrentUser);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsTablet(window.innerWidth < 1280);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+
+    const matchedOption = linkOptions.find((option) => {
+      if (option.to === routes.home) {
+        return currentPath === routes.home;
+      }
+      return currentPath.startsWith(option.to);
+    });
+
+    if (matchedOption) {
+      setSelectedLabel(matchedOption.label);
+    }
+  }, [location.pathname]);
+
   let hoverTimer: number;
 
   const handleMouseEnter = () => {
@@ -54,6 +88,16 @@ const Navbar = React.forwardRef<
     clearTimeout(hoverTimer);
     setShowLabel(false);
   };
+
+  const handleLinkClick = (label: string) => {
+    setSelectedLabel(label);
+  };
+
+  linkOptions.forEach((option) => {
+    if (option.label === 'Profile') {
+      option.to = `/${user?.username}`;
+    }
+  });
 
   return (
     <nav
@@ -69,10 +113,14 @@ const Navbar = React.forwardRef<
           key={label}
           leftIcon={icon}
           label={
-            showLabel ? <SlideAnimation>{label}</SlideAnimation> : undefined
+            (isTablet && selectedLabel === label) ||
+            (!isTablet && showLabel) ? (
+              <SlideAnimation>{label}</SlideAnimation>
+            ) : undefined
           }
           status="simple"
           style={{ justifyContent: 'left' }}
+          onClick={() => handleLinkClick(label)}
         />
       ))}
     </nav>

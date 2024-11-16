@@ -16,3 +16,5 @@ export type { NavLinkProps } from './navLink/type';
 export { default as Navbar } from './navbar/Navbar';
 
 export { default as SlideAnimation } from './animation/slide/Slide';
+
+export { default as FallbackLoader } from './fallbackLoader/FallbackLoader';

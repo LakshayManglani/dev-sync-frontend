@@ -17,6 +17,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       rightIcon,
       disabled,
       className,
+      responsive = true,
       ...props
     },
     ref
@@ -32,6 +33,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           styles[`border-${border}`],
           styles[`variant-${variant}`],
           styles[`status-${currentStatus}`],
+          responsive && styles.responsive,
           'body-base-slim',
           className
         )}
